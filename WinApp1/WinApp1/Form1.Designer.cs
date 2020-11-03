@@ -54,6 +54,9 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuTestCmd3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuDBUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.PopupMenu1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -75,29 +78,32 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(585, 188);
+            this.dataGridView1.Size = new System.Drawing.Size(730, 211);
             this.dataGridView1.TabIndex = 2;
+            this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
             // 
             // PopupMenu1
             // 
             this.PopupMenu1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.PopupMenu1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuAddColumn,
-            this.mnuAddRow});
+            this.mnuAddRow,
+            this.toolStripMenuItem3,
+            this.mnuDBUpdate});
             this.PopupMenu1.Name = "PopupMenu1";
-            this.PopupMenu1.Size = new System.Drawing.Size(168, 52);
+            this.PopupMenu1.Size = new System.Drawing.Size(211, 110);
             // 
             // mnuAddColumn
             // 
             this.mnuAddColumn.Name = "mnuAddColumn";
-            this.mnuAddColumn.Size = new System.Drawing.Size(167, 24);
+            this.mnuAddColumn.Size = new System.Drawing.Size(210, 24);
             this.mnuAddColumn.Text = "Column 추가";
             this.mnuAddColumn.Click += new System.EventHandler(this.mnuAddColumn_Click);
             // 
             // mnuAddRow
             // 
             this.mnuAddRow.Name = "mnuAddRow";
-            this.mnuAddRow.Size = new System.Drawing.Size(167, 24);
+            this.mnuAddRow.Size = new System.Drawing.Size(210, 24);
             this.mnuAddRow.Text = "Row 추가";
             this.mnuAddRow.Click += new System.EventHandler(this.mnuAddRow_Click);
             // 
@@ -109,7 +115,7 @@
             this.편집EToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(591, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(736, 28);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -156,7 +162,8 @@
             this.mnuTestCmd1,
             this.mnuTestCmd2,
             this.toolStripMenuItem2,
-            this.mnuTestCmd3});
+            this.mnuTestCmd3,
+            this.toolStripMenuItem4});
             this.편집EToolStripMenuItem.Name = "편집EToolStripMenuItem";
             this.편집EToolStripMenuItem.Size = new System.Drawing.Size(71, 24);
             this.편집EToolStripMenuItem.Text = "편집(E)";
@@ -187,9 +194,9 @@
             this.StatusLabel2,
             this.StatusLabel3,
             this.StatusCombo});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 338);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 373);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(591, 30);
+            this.statusStrip1.Size = new System.Drawing.Size(736, 30);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -245,10 +252,11 @@
             this.tbSql.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSql.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.tbSql.Location = new System.Drawing.Point(3, 3);
             this.tbSql.Multiline = true;
             this.tbSql.Name = "tbSql";
-            this.tbSql.Size = new System.Drawing.Size(585, 100);
+            this.tbSql.Size = new System.Drawing.Size(730, 112);
             this.tbSql.TabIndex = 6;
             // 
             // splitContainer1
@@ -267,8 +275,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dataGridView1);
-            this.splitContainer1.Size = new System.Drawing.Size(591, 304);
-            this.splitContainer1.SplitterDistance = 106;
+            this.splitContainer1.Size = new System.Drawing.Size(736, 339);
+            this.splitContainer1.SplitterDistance = 118;
             this.splitContainer1.TabIndex = 7;
             // 
             // toolStripMenuItem2
@@ -283,11 +291,28 @@
             this.mnuTestCmd3.Text = "Test 명령 3";
             this.mnuTestCmd3.Click += new System.EventHandler(this.mnuTestCmd3_Click);
             // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(207, 6);
+            // 
+            // mnuDBUpdate
+            // 
+            this.mnuDBUpdate.Name = "mnuDBUpdate";
+            this.mnuDBUpdate.Size = new System.Drawing.Size(210, 24);
+            this.mnuDBUpdate.Text = "DB Update";
+            this.mnuDBUpdate.Click += new System.EventHandler(this.mnuDBUpdate_Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(221, 6);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(591, 368);
+            this.ClientSize = new System.Drawing.Size(736, 403);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -336,6 +361,9 @@
         private System.Windows.Forms.ToolStripMenuItem mnuTestCmd2;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem mnuTestCmd3;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem mnuDBUpdate;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
     }
 }
 
