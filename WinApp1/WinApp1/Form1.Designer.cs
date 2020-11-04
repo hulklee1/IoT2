@@ -55,6 +55,8 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.stCombo1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.StatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.PopupMenu2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuExcuteSql = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.PopupMenu1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -63,6 +65,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.PopupMenu2.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -125,7 +128,7 @@
             this.편집EToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(736, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(736, 30);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -241,18 +244,21 @@
             this.tbSql.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSql.ContextMenuStrip = this.PopupMenu2;
             this.tbSql.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.tbSql.Location = new System.Drawing.Point(3, 3);
             this.tbSql.Multiline = true;
             this.tbSql.Name = "tbSql";
             this.tbSql.Size = new System.Drawing.Size(730, 112);
             this.tbSql.TabIndex = 6;
+            this.tbSql.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSql_KeyPress);
             // 
             // splitContainer1
             // 
             this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.splitContainer1.Location = new System.Drawing.Point(0, 31);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -285,6 +291,21 @@
             this.StatusLabel3.Size = new System.Drawing.Size(102, 24);
             this.StatusLabel3.Text = "Sql message...";
             // 
+            // PopupMenu2
+            // 
+            this.PopupMenu2.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.PopupMenu2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuExcuteSql});
+            this.PopupMenu2.Name = "PopupMenu2";
+            this.PopupMenu2.Size = new System.Drawing.Size(156, 28);
+            // 
+            // mnuExcuteSql
+            // 
+            this.mnuExcuteSql.Name = "mnuExcuteSql";
+            this.mnuExcuteSql.Size = new System.Drawing.Size(210, 24);
+            this.mnuExcuteSql.Text = "SQL문 실행";
+            this.mnuExcuteSql.Click += new System.EventHandler(this.mnuExcuteSql_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -293,6 +314,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
@@ -308,6 +330,7 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.PopupMenu2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -339,6 +362,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripDropDownButton stCombo1;
         private System.Windows.Forms.ToolStripStatusLabel StatusLabel3;
+        private System.Windows.Forms.ContextMenuStrip PopupMenu2;
+        private System.Windows.Forms.ToolStripMenuItem mnuExcuteSql;
     }
 }
 

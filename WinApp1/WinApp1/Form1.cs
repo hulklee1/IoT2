@@ -118,6 +118,10 @@ namespace WinApp1
                 else  // Select 문일 경우 조회된 데이터를 GridView에 표시
                 {
                     int i, j, k;
+
+                    dataGridView1.Rows.Clear();
+                    dataGridView1.Columns.Clear();
+
                     SqlDataReader sr = sCmd.ExecuteReader();
                     for(i=0;i<sr.FieldCount;i++)
                     {
@@ -131,6 +135,7 @@ namespace WinApp1
                             dataGridView1.Rows[i].Cells[j].Value = sr.GetValue(j);
                         }
                     }
+                    sr.Close();
                 }
                 StatusLabel3.Text = "Sucess.";
                 StatusLabel3.BackColor = Color.Blue;
@@ -160,7 +165,7 @@ namespace WinApp1
         private void mnuTestCmd3_Click(object sender, EventArgs e)
         {
             RunSql("select * from facility");
-            StatusLabel3.Text = "facility";
+            stCombo1.Text = "facility";
         }
 
         private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -181,7 +186,7 @@ namespace WinApp1
                 {
                     if(dataGridView1.Rows[i].Cells[j].ToolTipText == ".")  // Update cell
                     {
-                        string tn = StatusLabel3.Text;      //  Table_Name
+                        string tn = stCombo1.Text;      //  Table_Name
                         string fn = dataGridView1.Columns[j].HeaderText;   // Field_Name
                         string cv = dataGridView1.Rows[i].Cells[j].Value.ToString();   // Cell Value
                         string iv = dataGridView1.Columns[0].HeaderText;   // ID Field
@@ -199,6 +204,27 @@ namespace WinApp1
             string str = e.ClickedItem.Text;  // Table 명
             stCombo1.Text = str;
             RunSql($"Select * from {str}");
+        }
+
+        private void tbSql_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar == '\r')
+            {
+                string str = tbSql.Text.Trim();
+                // 마지막 문장 (ENTER KEY 입력기준) 추출
+                // [ENTER] key value : '\r' CR(carrage return)  + 
+                // 실제 Text에는 '\r\n' ('\n'이 추가됨)
+                // Solution : '\r' 값을 구분자로 하는 GetToken 기법 사용
+                string[] bStr = str.Split('\r');
+                string Result = bStr.Last().Trim();  // white-space 제거
+                RunSql(Result);
+            }
+        }
+
+        private void mnuExcuteSql_Click(object sender, EventArgs e)
+        {
+            string str = tbSql.SelectedText;
+            RunSql(str);
         }
     }
 }
