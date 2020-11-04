@@ -57,6 +57,7 @@
             this.StatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.PopupMenu2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuExcuteSql = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSaveTable = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.PopupMenu1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -90,33 +91,34 @@
             this.mnuAddColumn,
             this.mnuAddRow,
             this.toolStripMenuItem3,
-            this.mnuDBUpdate});
+            this.mnuDBUpdate,
+            this.mnuSaveTable});
             this.PopupMenu1.Name = "PopupMenu1";
-            this.PopupMenu1.Size = new System.Drawing.Size(168, 82);
+            this.PopupMenu1.Size = new System.Drawing.Size(211, 134);
             // 
             // mnuAddColumn
             // 
             this.mnuAddColumn.Name = "mnuAddColumn";
-            this.mnuAddColumn.Size = new System.Drawing.Size(167, 24);
+            this.mnuAddColumn.Size = new System.Drawing.Size(210, 24);
             this.mnuAddColumn.Text = "Column 추가";
             this.mnuAddColumn.Click += new System.EventHandler(this.mnuAddColumn_Click);
             // 
             // mnuAddRow
             // 
             this.mnuAddRow.Name = "mnuAddRow";
-            this.mnuAddRow.Size = new System.Drawing.Size(167, 24);
+            this.mnuAddRow.Size = new System.Drawing.Size(210, 24);
             this.mnuAddRow.Text = "Row 추가";
             this.mnuAddRow.Click += new System.EventHandler(this.mnuAddRow_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(164, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(207, 6);
             // 
             // mnuDBUpdate
             // 
             this.mnuDBUpdate.Name = "mnuDBUpdate";
-            this.mnuDBUpdate.Size = new System.Drawing.Size(167, 24);
+            this.mnuDBUpdate.Size = new System.Drawing.Size(210, 24);
             this.mnuDBUpdate.Text = "DB Update";
             this.mnuDBUpdate.Click += new System.EventHandler(this.mnuDBUpdate_Click);
             // 
@@ -128,7 +130,7 @@
             this.편집EToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(736, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(736, 28);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -249,6 +251,7 @@
             this.tbSql.Location = new System.Drawing.Point(3, 3);
             this.tbSql.Multiline = true;
             this.tbSql.Name = "tbSql";
+            this.tbSql.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbSql.Size = new System.Drawing.Size(730, 112);
             this.tbSql.TabIndex = 6;
             this.tbSql.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSql_KeyPress);
@@ -302,9 +305,16 @@
             // mnuExcuteSql
             // 
             this.mnuExcuteSql.Name = "mnuExcuteSql";
-            this.mnuExcuteSql.Size = new System.Drawing.Size(210, 24);
+            this.mnuExcuteSql.Size = new System.Drawing.Size(155, 24);
             this.mnuExcuteSql.Text = "SQL문 실행";
             this.mnuExcuteSql.Click += new System.EventHandler(this.mnuExcuteSql_Click);
+            // 
+            // mnuSaveTable
+            // 
+            this.mnuSaveTable.Name = "mnuSaveTable";
+            this.mnuSaveTable.Size = new System.Drawing.Size(210, 24);
+            this.mnuSaveTable.Text = "Table 저장";
+            this.mnuSaveTable.Click += new System.EventHandler(this.mnuSaveTable_Click);
             // 
             // Form1
             // 
@@ -364,6 +374,7 @@
         private System.Windows.Forms.ToolStripStatusLabel StatusLabel3;
         private System.Windows.Forms.ContextMenuStrip PopupMenu2;
         private System.Windows.Forms.ToolStripMenuItem mnuExcuteSql;
+        private System.Windows.Forms.ToolStripMenuItem mnuSaveTable;
     }
 }
 

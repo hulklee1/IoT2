@@ -18,10 +18,9 @@ namespace WinApp1
         }
 
         public string sRet = "";
-
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(e.KeyChar == '\r')   // [Enter] Key pressed  (13:0d)
+            if (e.KeyChar == '\r')   // [Enter] Key pressed  (13:0d)
             {
                 sRet = textBox1.Text;
                 Close();
