@@ -62,7 +62,7 @@ namespace WinApp1
                     sConn.Open();
                     sCmd.Connection = sConn;
 
-                    StatusLabel1.Text = "Database Opened.";
+                    StatusLabel1.Text = openFileDialog1.SafeFileName;  // 경로를 제외한 파일명  "Database Opened.";
                     StatusLabel1.BackColor = Color.Green;
 
                     DataTable dt = sConn.GetSchema("Tables");
@@ -70,8 +70,8 @@ namespace WinApp1
                     {
                         string str = dt.Rows[i].ItemArray[2].ToString(); // 2번째 배열요소가 Table 이름
                         tbSql.Text += str + "\r\n";
-                        stComboBox1.Items.Add(str);
-                        stComboBox1.Text = str;
+                        stCombo1.DropDownItems.Add(str);    //sComboBox1.Items.Add(str);
+                        stCombo1.Text = str;
                     }    
                 }
             }
@@ -132,13 +132,13 @@ namespace WinApp1
                         }
                     }
                 }
-                StatusLabel2.Text = "Sucess.";
-                StatusLabel2.BackColor = Color.Blue;
+                StatusLabel3.Text = "Sucess.";
+                StatusLabel3.BackColor = Color.Blue;
             }
             catch(Exception e1)
             {
-                StatusLabel2.Text = e1.Message;
-                StatusLabel2.BackColor = Color.Red;
+                StatusLabel3.Text = e1.Message;
+                StatusLabel3.BackColor = Color.Red;
             }
         }
 
@@ -192,6 +192,13 @@ namespace WinApp1
                     }
                 }
             }
+        }
+
+        private void stCombo1_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            string str = e.ClickedItem.Text;  // Table 명
+            stCombo1.Text = str;
+            RunSql($"Select * from {str}");
         }
     }
 }
