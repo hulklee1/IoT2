@@ -58,6 +58,13 @@
             this.PopupMenu2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuExcuteSql = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSaveTable = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuDBInsert = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuDBDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuCSVImport = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCSVExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.PopupMenu1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -83,6 +90,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(730, 211);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
+            this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView1_RowsAdded);
             // 
             // PopupMenu1
             // 
@@ -92,33 +100,36 @@
             this.mnuAddRow,
             this.toolStripMenuItem3,
             this.mnuDBUpdate,
+            this.mnuDBInsert,
+            this.mnuDBDelete,
+            this.toolStripMenuItem5,
             this.mnuSaveTable});
             this.PopupMenu1.Name = "PopupMenu1";
-            this.PopupMenu1.Size = new System.Drawing.Size(211, 134);
+            this.PopupMenu1.Size = new System.Drawing.Size(168, 160);
             // 
             // mnuAddColumn
             // 
             this.mnuAddColumn.Name = "mnuAddColumn";
-            this.mnuAddColumn.Size = new System.Drawing.Size(210, 24);
+            this.mnuAddColumn.Size = new System.Drawing.Size(167, 24);
             this.mnuAddColumn.Text = "Column 추가";
             this.mnuAddColumn.Click += new System.EventHandler(this.mnuAddColumn_Click);
             // 
             // mnuAddRow
             // 
             this.mnuAddRow.Name = "mnuAddRow";
-            this.mnuAddRow.Size = new System.Drawing.Size(210, 24);
+            this.mnuAddRow.Size = new System.Drawing.Size(167, 24);
             this.mnuAddRow.Text = "Row 추가";
             this.mnuAddRow.Click += new System.EventHandler(this.mnuAddRow_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(207, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(164, 6);
             // 
             // mnuDBUpdate
             // 
             this.mnuDBUpdate.Name = "mnuDBUpdate";
-            this.mnuDBUpdate.Size = new System.Drawing.Size(210, 24);
+            this.mnuDBUpdate.Size = new System.Drawing.Size(167, 24);
             this.mnuDBUpdate.Text = "DB Update";
             this.mnuDBUpdate.Click += new System.EventHandler(this.mnuDBUpdate_Click);
             // 
@@ -140,6 +151,9 @@
             this.mnuDBOpen,
             this.mnuDBClose,
             this.toolStripMenuItem1,
+            this.mnuCSVImport,
+            this.mnuCSVExport,
+            this.toolStripMenuItem6,
             this.종료XToolStripMenuItem});
             this.파일FToolStripMenuItem.Name = "파일FToolStripMenuItem";
             this.파일FToolStripMenuItem.Size = new System.Drawing.Size(70, 24);
@@ -237,9 +251,11 @@
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.StatusLabel1.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
+            this.StatusLabel1.DoubleClickEnabled = true;
             this.StatusLabel1.Name = "StatusLabel1";
             this.StatusLabel1.Size = new System.Drawing.Size(134, 24);
             this.StatusLabel1.Text = "SQL Database file";
+            this.StatusLabel1.DoubleClick += new System.EventHandler(this.RefreshTable);
             // 
             // tbSql
             // 
@@ -312,9 +328,47 @@
             // mnuSaveTable
             // 
             this.mnuSaveTable.Name = "mnuSaveTable";
-            this.mnuSaveTable.Size = new System.Drawing.Size(210, 24);
+            this.mnuSaveTable.Size = new System.Drawing.Size(167, 24);
             this.mnuSaveTable.Text = "Table 저장";
             this.mnuSaveTable.Click += new System.EventHandler(this.mnuSaveTable_Click);
+            // 
+            // mnuDBInsert
+            // 
+            this.mnuDBInsert.Name = "mnuDBInsert";
+            this.mnuDBInsert.Size = new System.Drawing.Size(167, 24);
+            this.mnuDBInsert.Text = "DB Insert";
+            this.mnuDBInsert.Click += new System.EventHandler(this.mnuDBInsert_Click);
+            // 
+            // mnuDBDelete
+            // 
+            this.mnuDBDelete.Name = "mnuDBDelete";
+            this.mnuDBDelete.Size = new System.Drawing.Size(167, 24);
+            this.mnuDBDelete.Text = "DB Delete";
+            this.mnuDBDelete.Click += new System.EventHandler(this.mnuDBDelete_Click);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(164, 6);
+            // 
+            // mnuCSVImport
+            // 
+            this.mnuCSVImport.Name = "mnuCSVImport";
+            this.mnuCSVImport.Size = new System.Drawing.Size(254, 26);
+            this.mnuCSVImport.Text = "Excel (*.csv) Import";
+            this.mnuCSVImport.Click += new System.EventHandler(this.mnuCSVImport_Click);
+            // 
+            // mnuCSVExport
+            // 
+            this.mnuCSVExport.Name = "mnuCSVExport";
+            this.mnuCSVExport.Size = new System.Drawing.Size(254, 26);
+            this.mnuCSVExport.Text = "Excel (*.csv) Export";
+            this.mnuCSVExport.Click += new System.EventHandler(this.mnuCSVExport_Click);
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(251, 6);
             // 
             // Form1
             // 
@@ -375,6 +429,13 @@
         private System.Windows.Forms.ContextMenuStrip PopupMenu2;
         private System.Windows.Forms.ToolStripMenuItem mnuExcuteSql;
         private System.Windows.Forms.ToolStripMenuItem mnuSaveTable;
+        private System.Windows.Forms.ToolStripMenuItem mnuDBInsert;
+        private System.Windows.Forms.ToolStripMenuItem mnuDBDelete;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem mnuCSVImport;
+        private System.Windows.Forms.ToolStripMenuItem mnuCSVExport;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 

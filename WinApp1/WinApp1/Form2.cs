@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace WinApp1
 {
@@ -23,6 +24,12 @@ namespace WinApp1
             if (e.KeyChar == '\r')   // [Enter] Key pressed  (13:0d)
             {
                 sRet = textBox1.Text;
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+            else if (e.KeyChar == (char)Keys.Escape)  // [Enter] Key pressed  (13:0d)
+            {
+                DialogResult = DialogResult.Cancel;
                 Close();
             }
         }

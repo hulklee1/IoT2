@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,10 +24,9 @@ namespace WinApp1
         private void mnuAddColumn_Click(object sender, EventArgs e)
         {
             frmInput dlg = new frmInput();
-            dlg.ShowDialog();
-            string str = dlg.sRet;
-            if (str != "")
+            if(dlg.ShowDialog() == DialogResult.OK)
             {
+                string str = dlg.sRet;
                 dataGridView1.Columns.Add(str, str);
             }
         }
@@ -65,14 +65,15 @@ namespace WinApp1
                     StatusLabel1.Text = openFileDialog1.SafeFileName;  // 경로를 제외한 파일명  "Database Opened.";
                     StatusLabel1.BackColor = Color.Green;
 
-                    DataTable dt = sConn.GetSchema("Tables");
-                    for(int i=0;i<dt.Rows.Count;i++)
-                    {
-                        string str = dt.Rows[i].ItemArray[2].ToString(); // 2번째 배열요소가 Table 이름
-                        tbSql.Text += str + "\r\n";
-                        stCombo1.DropDownItems.Add(str);    //sComboBox1.Items.Add(str);
-                        stCombo1.Text = str;
-                    }    
+                    RefreshTable();
+                    //DataTable dt = sConn.GetSchema("Tables");
+                    //for(int i=0;i<dt.Rows.Count;i++)
+                    //{
+                    //    string str = dt.Rows[i].ItemArray[2].ToString(); // 2번째 배열요소가 Table 이름
+                    //    tbSql.Text += str + "\r\n";
+                    //    stCombo1.DropDownItems.Add(str);    //sComboBox1.Items.Add(str);
+                    //    stCombo1.Text = str;
+                    //}    
                 }
             }
             catch(Exception e1)
@@ -135,11 +136,13 @@ namespace WinApp1
                     }
                     for(i=0;sr.Read();i++)    // Row index
                     {
-                        dataGridView1.Rows.Add();
+                        dataGridView1.Rows.Add();   // RowHeader에 '.' 생성됨
                         for(j=0;j<sr.FieldCount;j++)  // column index
                         {
                             dataGridView1.Rows[i].Cells[j].Value = sr.GetValue(j).ToString().Trim();
                         }
+//                        dataGridView1.Rows[dataGridView1.RowCount - 1].HeaderCell.Value = "";   // RowHeader에 '.' 생성됨
+                        dataGridView1.Rows[i].HeaderCell.Value = "";   // RowHeader에 '.' 생성됨
                     }
                     sr.Close();
                 }
@@ -194,9 +197,9 @@ namespace WinApp1
                     {
                         string tn = stCombo1.Text;      //  Table_Name
                         string fn = dataGridView1.Columns[j].HeaderText;   // Field_Name
-                        string cv = dataGridView1.Rows[i].Cells[j].Value.ToString();   // Cell Value
+                        string cv = (string)dataGridView1.Rows[i].Cells[j].Value;   // Cell Value
                         string iv = dataGridView1.Columns[0].HeaderText;   // ID Field
-                        string jv = dataGridView1.Rows[i].Cells[0].Value.ToString();   // ID Value
+                        string jv = (string)dataGridView1.Rows[i].Cells[0].Value;   // ID Value
                         string sql = $"update {tn} set {fn}=N'{cv}' where {iv}='{jv}'";
                         RunSql(sql);
                         dataGridView1.Rows[i].Cells[j].ToolTipText = "";
@@ -278,6 +281,123 @@ namespace WinApp1
                     }
                 }
                 mnuDBUpdate_Click(sender, e);
+            }
+        }
+
+        private void RefreshTable()
+        {
+            stCombo1.DropDownItems.Clear();  // 기존 Items 삭제 - 초기화
+            DataTable dt = sConn.GetSchema("Tables");
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                string str = dt.Rows[i].ItemArray[2].ToString(); // 2번째 배열요소가 Table 이름
+                //tbSql.Text += str + "\r\n";
+                stCombo1.DropDownItems.Add(str);    //sComboBox1.Items.Add(str);
+                //stCombo1.Text = str;
+            }
+        }
+
+        private void RefreshTable(object sender, EventArgs e)
+        {
+            RefreshTable();
+        }
+
+        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            int n = e.RowIndex;
+            dataGridView1.Rows[n].HeaderCell.Value = ".";
+        }
+
+        private void mnuDBInsert_Click(object sender, EventArgs e)
+        {   // Insert into [TABLE_NAME] values ('[F1]','[F2]'...)
+            int i, j;
+
+            for (i = 0; i < dataGridView1.RowCount - 1; i++)  // Row indexing
+            {
+                if ((string)dataGridView1.Rows[i].HeaderCell.Value == ".")  // Update cell
+                {
+                    string sql = $"Insert into {stCombo1.Text} values (";
+                    for (j = 0; j < dataGridView1.ColumnCount; j++)   // Column indexing
+                    {
+                        string cv = (string)dataGridView1.Rows[i].Cells[j].Value;   // Cell Value
+                        sql += $"N'{cv}'";
+                        if(j<dataGridView1.ColumnCount-1) sql += ",";
+                    }
+                    sql += ")";
+                    RunSql(sql);
+                    dataGridView1.Rows[i].HeaderCell.Value = "";
+                }
+            }
+        }
+
+        private void mnuDBDelete_Click(object sender, EventArgs e)
+        {   // Delete [Table_Name] where [Col_Name] = '[Col_Value]'
+            int y = dataGridView1.SelectedCells[0].RowIndex;
+            string tn = stCombo1.Text;
+            if(tn != "")
+            {
+                string cn = dataGridView1.Columns[0].HeaderText;
+                string cv = (string)dataGridView1.Rows[y].Cells[0].Value;
+                string sql = $"Delete {tn} where {cn}='{cv}'";
+                RunSql(sql);
+            }
+        }
+
+        private void mnuCSVImport_Click(object sender, EventArgs e)
+        {
+            if(openFileDialog1.ShowDialog() == DialogResult.OK)
+            {   // Stream
+                int i, j, k;
+                dataGridView1.Rows.Clear();
+                dataGridView1.Columns.Clear();
+
+                StreamReader sr = new StreamReader(openFileDialog1.FileName);
+           //     StreamWriter sw = new StreamWriter(....)
+                string str = sr.ReadLine();  // 컬럼 정의 라인 Read
+                string[] sCols = str.Split(',');    // ',' 로 구분된 컬럼명을 문자열 배열로 분할
+                for (i = 0; i < sCols.Length; i++)
+                    dataGridView1.Columns.Add(sCols[i],sCols[i]);
+                
+                for(i = 0;;i++)
+                {
+                    str = sr.ReadLine();  // 1라인을 읽고 셀로 분할
+                    if (str == null) break;
+
+                    dataGridView1.Rows.Add();
+                    for(j=0;j<sCols.Length;j++)
+                    {
+                        dataGridView1.Rows[i].Cells[j].Value = GetToken(j, str, ",");
+                    }
+                }
+                sr.Close();
+            }
+        }
+
+        private void mnuCSVExport_Click(object sender, EventArgs e)
+        {
+            if(saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                int i, j, k;
+                StreamWriter sw = new StreamWriter(saveFileDialog1.FileName);
+                string str = "";
+                for(i=0;i<dataGridView1.ColumnCount;i++) // Header Line 작성
+                {
+                    str += dataGridView1.Columns[i].HeaderText;
+                    if (i < dataGridView1.ColumnCount - 1) str += ",";
+                }
+                sw.WriteLine(str);
+
+                for(i=0;i<dataGridView1.RowCount-1;i++)
+                {
+                    str = "";
+                    for(j=0;j<dataGridView1.ColumnCount;j++) // Header Line 작성
+                    {
+                        str += (string)dataGridView1.Rows[i].Cells[j].Value;
+                        if (j < dataGridView1.ColumnCount - 1) str += ",";
+                    }
+                    sw.WriteLine(str);
+                }
+                sw.Close();
             }
         }
     }
