@@ -23,7 +23,7 @@ namespace WinApp1
         SqlCommand sCmd = new SqlCommand();        // sql 명령문 처리
         private void mnuAddColumn_Click(object sender, EventArgs e)
         {
-            frmInput dlg = new frmInput();
+            frmInput dlg = new frmInput("Column Name");
             if(dlg.ShowDialog() == DialogResult.OK)
             {
                 string str = dlg.sRet;
@@ -86,6 +86,8 @@ namespace WinApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // TODO: 이 코드는 데이터를 'myTableDataSet.facility' 테이블에 로드합니다. 필요 시 이 코드를 이동하거나 제거할 수 있습니다.
+            this.facilityTableAdapter.Fill(this.myTableDataSet.facility);
 
         }
 
@@ -160,9 +162,16 @@ namespace WinApp1
         {
 //            string sTime = GetToken(0,DateTime.Now.Date.ToString()," ");   // " 2020-11-03 오전 11:46:00"
             string sTime = $"{DateTime.Now:s}";   // " 2020-11-03 오전 11:46:00"  : Locale : 지역화 <> Global
-            string str = $"insert into fStatus values ('10001','10.50','50.00','02.00','{sTime}')"; // SQL Insert 문
-            RunSql(str);
-        }                             
+            string str = $"insert into fStatus values ('10001','10.50','50.00','02.00',N'{sTime}')"; // SQL Insert 문
+            RunSql(mnuTestString1);
+        }
+        string mnuTestString1;
+        private void mnuTestCmd1_MouseHover(object sender, EventArgs e)
+        {
+            frmInput dlg = new frmInput("");
+            if(dlg.ShowDialog() == DialogResult.OK) 
+                mnuTestString1 = dlg.sRet;
+        }
 
         private void mnuTestCmd2_Click(object sender, EventArgs e)
         {
@@ -215,6 +224,7 @@ namespace WinApp1
             RunSql($"Select * from {str}");
         }
 
+        string[] sSqlCMDs = { "select", "insert", "update", "delete", "Create", "alter" };
         private void tbSql_KeyPress(object sender, KeyPressEventArgs e)
         {
             if(e.KeyChar == '\r')
@@ -227,8 +237,9 @@ namespace WinApp1
                 string[] bStr = str.Split('\r');
                 string Result = bStr.Last().Trim();  // white-space 제거
                 string s1 = GetToken(0, Result, " ").ToLower();
-                if(s1 == "select" || s1 == "insert" || s1 == "update" || s1 == "delete" 
-                   || s1 == "Create" || s1 == "alter")
+                //string s2 = Array.Find(sSqlCMDs, s => s == s1);
+                //if(s1 == "select" || s1 == "insert" || s1 == "update" || s1 == "delete" || s1 == "Create" || s1 == "alter")
+                if(Array.IndexOf(sSqlCMDs,s1) != -1)
                     RunSql(Result);
             }
         }
@@ -245,7 +256,7 @@ namespace WinApp1
             string sTable = stCombo1.Text;
             if(sTable == "")    // Table 명이 없으므로 새로운 Table 생성
             {   // cleate table [TABLE_NAME] ( [COL_NAME] nchar(20),
-                frmInput dlg = new frmInput();
+                frmInput dlg = new frmInput("");
                 dlg.ShowDialog();
                 sTable = dlg.sRet;
                 string sql = $"create table {sTable} (";
@@ -351,7 +362,7 @@ namespace WinApp1
                 dataGridView1.Rows.Clear();
                 dataGridView1.Columns.Clear();
 
-                StreamReader sr = new StreamReader(openFileDialog1.FileName);
+                StreamReader sr = new StreamReader(openFileDialog1.FileName,Encoding.Default);
            //     StreamWriter sw = new StreamWriter(....)
                 string str = sr.ReadLine();  // 컬럼 정의 라인 Read
                 string[] sCols = str.Split(',');    // ',' 로 구분된 컬럼명을 문자열 배열로 분할
@@ -378,7 +389,7 @@ namespace WinApp1
             if(saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 int i, j, k;
-                StreamWriter sw = new StreamWriter(saveFileDialog1.FileName);
+                StreamWriter sw = new StreamWriter(saveFileDialog1.FileName,false,Encoding.Default);
                 string str = "";
                 for(i=0;i<dataGridView1.ColumnCount;i++) // Header Line 작성
                 {

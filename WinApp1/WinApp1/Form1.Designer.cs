@@ -65,6 +65,9 @@
             this.mnuCSVExport = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.myTableDataSet = new WinApp1.MyTableDataSet();
+            this.facilityBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.facilityTableAdapter = new WinApp1.MyTableDataSetTableAdapters.facilityTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.PopupMenu1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -74,6 +77,8 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.PopupMenu2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.myTableDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.facilityBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -203,6 +208,7 @@
             this.mnuTestCmd1.Size = new System.Drawing.Size(224, 26);
             this.mnuTestCmd1.Text = "Test 명령 1";
             this.mnuTestCmd1.Click += new System.EventHandler(this.mnuTestCmd1_Click);
+            this.mnuTestCmd1.MouseHover += new System.EventHandler(this.mnuTestCmd1_MouseHover);
             // 
             // mnuTestCmd2
             // 
@@ -370,6 +376,20 @@
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
             this.toolStripMenuItem6.Size = new System.Drawing.Size(251, 6);
             // 
+            // myTableDataSet
+            // 
+            this.myTableDataSet.DataSetName = "MyTableDataSet";
+            this.myTableDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // facilityBindingSource
+            // 
+            this.facilityBindingSource.DataMember = "facility";
+            this.facilityBindingSource.DataSource = this.myTableDataSet;
+            // 
+            // facilityTableAdapter
+            // 
+            this.facilityTableAdapter.ClearBeforeFill = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -395,6 +415,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.PopupMenu2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.myTableDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.facilityBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -436,6 +458,9 @@
         private System.Windows.Forms.ToolStripMenuItem mnuCSVExport;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private MyTableDataSet myTableDataSet;
+        private System.Windows.Forms.BindingSource facilityBindingSource;
+        private MyTableDataSetTableAdapters.facilityTableAdapter facilityTableAdapter;
     }
 }
 

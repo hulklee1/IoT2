@@ -13,9 +13,11 @@ namespace WinApp1
 {
     public partial class frmInput : Form
     {
-        public frmInput()
+        public frmInput(string str="",int x=0, int y=0) // 초기값 설정
         {
             InitializeComponent();
+            lblPrompt.Text = str;
+            Location = new Point(x, y);
         }
 
         public string sRet = "";

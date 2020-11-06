@@ -20,3 +20,5 @@ C:\Users\bn\source\repos\TestFolder\WinApp1\WinApp1\bin\Debug\WinApp1.exe.config
 C:\Users\bn\source\repos\TestFolder\WinApp1\WinApp1\bin\Debug\WinApp1.exe
 C:\Users\bn\source\repos\TestFolder\WinApp1\WinApp1\bin\Debug\WinApp1.pdb
 C:\Users\bn\source\repos\TestFolder\WinApp1\WinApp1\obj\Debug\WinApp1.Form1.resources
+C:\Users\bn\source\repos\TestFolder\WinApp1\WinApp1\bin\Debug\MyTable.mdf
+C:\Users\bn\source\repos\TestFolder\WinApp1\WinApp1\bin\Debug\MyTable_log.ldf
