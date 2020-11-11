@@ -1,0 +1,10 @@
+C:\Users\bn\source\repos\ClientEmul\ClientEmul\bin\Debug\ClientEmul.exe.config
+C:\Users\bn\source\repos\ClientEmul\ClientEmul\bin\Debug\ClientEmul.exe
+C:\Users\bn\source\repos\ClientEmul\ClientEmul\bin\Debug\ClientEmul.pdb
+C:\Users\bn\source\repos\ClientEmul\ClientEmul\obj\Debug\ClientEmul.csprojAssemblyReference.cache
+C:\Users\bn\source\repos\ClientEmul\ClientEmul\obj\Debug\ClientEmul.Form1.resources
+C:\Users\bn\source\repos\ClientEmul\ClientEmul\obj\Debug\ClientEmul.Properties.Resources.resources
+C:\Users\bn\source\repos\ClientEmul\ClientEmul\obj\Debug\ClientEmul.csproj.GenerateResource.cache
+C:\Users\bn\source\repos\ClientEmul\ClientEmul\obj\Debug\ClientEmul.csproj.CoreCompileInputs.cache
+C:\Users\bn\source\repos\ClientEmul\ClientEmul\obj\Debug\ClientEmul.exe
+C:\Users\bn\source\repos\ClientEmul\ClientEmul\obj\Debug\ClientEmul.pdb

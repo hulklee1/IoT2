@@ -28,7 +28,7 @@
                 <asp:Button ID="Button1" runat="server" Text="Login" OnClick="Button1_Click" />
             </p>
             <p>
-                <asp:Label ID="Label2" runat="server" Text="Passwd  "></asp:Label><asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                <asp:Label ID="Label2" runat="server" Text="Passwd  "></asp:Label><asp:TextBox ID="TextBox2" runat="server" TextMode="Password"></asp:TextBox>
             </p>
             <p>
                 <asp:Label ID="lblMessage" runat="server" Text=" "></asp:Label><asp:Button ID="Button3" runat="server" Text="회원가입" OnClientClick="window.open('SignupPage.aspx')" Visible="False" />
