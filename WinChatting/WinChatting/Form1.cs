@@ -69,7 +69,7 @@ namespace WinChatting
                 {   
                     NetworkStream ns = _socket.GetStream();
                     int n = ns.Read(bArr, 0, 10000);
-                    string str = Encoding.Default.GetString(bArr,0,n)+"\r\n";
+                    string str = Encoding.Default.GetString(bArr, 0, n)+"\r\n";
                     AddText(str);
                 }
             }
@@ -90,14 +90,27 @@ namespace WinChatting
             }
         }
 
-        private void mnuSend1_Click(object sender, EventArgs e)
+        public void SendString(string str)
         {
             if (_socket != null)
             {
                 NetworkStream ns = _socket.GetStream();
-                string str = tbClient.SelectedText;
                 byte[] bArr1 = Encoding.Default.GetBytes(str);
                 ns.Write(bArr1, 0, bArr1.Length);
+            }
+        }
+
+        private void mnuSend1_Click(object sender, EventArgs e)
+        {
+            SendString(tbClient.SelectedText);
+        }
+
+        private void tbClient_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar == '\r')
+            {
+                string str = tbClient.Text.Trim().Split('\r').Last();
+                SendString(str);
             }
         }
     }

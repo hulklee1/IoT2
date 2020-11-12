@@ -88,10 +88,10 @@ namespace ClientEmul
             {
                 while (true)
                 {
+                    Thread.Sleep(20);
                     int n = _sock.Receive(bArr); // Low level socket method
                     string str = Encoding.Default.GetString(bArr,0,n) + "\r\n";
                     AddText(str);
-                    Thread.Sleep(20);
                 }
             }
             catch (Exception e)
@@ -121,14 +121,25 @@ namespace ClientEmul
         {
             timer1.Enabled = false;
         }
-
-        private void mnuSend1_Click(object sender, EventArgs e)
+        public void SendString(string str)
         {
             if(_sock != null)
             {
-                string str = tbCommand.SelectedText;
-                bArr = Encoding.Default.GetBytes(str);
-                _sock.Send(bArr);
+                byte[] bArr1 = Encoding.Default.GetBytes(str);
+                _sock.Send(bArr1);
+            }
+        }
+        private void mnuSend1_Click(object sender, EventArgs e)
+        {
+            SendString(tbCommand.SelectedText);
+        }
+
+        private void tbCommand_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '\r')
+            {
+                string str = tbCommand.Text.Trim().Split('\r').Last();
+                SendString(str);
             }
         }
     }

@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tbCommand = new System.Windows.Forms.TextBox();
+            this.PopupMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuSend1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tbServerIP = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tbServerPort = new System.Windows.Forms.TextBox();
@@ -50,8 +52,6 @@
             this.tbSep = new System.Windows.Forms.TextBox();
             this.tbRetry = new System.Windows.Forms.TextBox();
             this.ckbTimer = new System.Windows.Forms.CheckBox();
-            this.PopupMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mnuSend1 = new System.Windows.Forms.ToolStripMenuItem();
             this.PopupMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,6 +66,22 @@
             this.tbCommand.Name = "tbCommand";
             this.tbCommand.Size = new System.Drawing.Size(490, 187);
             this.tbCommand.TabIndex = 0;
+            this.tbCommand.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCommand_KeyPress);
+            // 
+            // PopupMenu
+            // 
+            this.PopupMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.PopupMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuSend1});
+            this.PopupMenu.Name = "PopupMenu";
+            this.PopupMenu.Size = new System.Drawing.Size(209, 28);
+            // 
+            // mnuSend1
+            // 
+            this.mnuSend1.Name = "mnuSend1";
+            this.mnuSend1.Size = new System.Drawing.Size(208, 24);
+            this.mnuSend1.Text = "선택된 문자열 전송";
+            this.mnuSend1.Click += new System.EventHandler(this.mnuSend1_Click);
             // 
             // tbServerIP
             // 
@@ -237,21 +253,6 @@
             this.ckbTimer.Size = new System.Drawing.Size(18, 17);
             this.ckbTimer.TabIndex = 4;
             this.ckbTimer.UseVisualStyleBackColor = true;
-            // 
-            // PopupMenu
-            // 
-            this.PopupMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.PopupMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuSend1});
-            this.PopupMenu.Name = "PopupMenu";
-            this.PopupMenu.Size = new System.Drawing.Size(209, 28);
-            // 
-            // mnuSend1
-            // 
-            this.mnuSend1.Name = "mnuSend1";
-            this.mnuSend1.Size = new System.Drawing.Size(210, 24);
-            this.mnuSend1.Text = "선택된 문자열 전송";
-            this.mnuSend1.Click += new System.EventHandler(this.mnuSend1_Click);
             // 
             // Form1
             // 
