@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,6 +14,22 @@ namespace ClientEmul
 {
     public partial class Form1 : Form
     {
+        delegate void AddTextCB(string str);
+
+        public void AddText(string str)
+        {
+            if (tbCommand.InvokeRequired)
+            {
+                AddTextCB cb = new AddTextCB(AddText);
+                object[] ob = { str };
+                Invoke(cb, ob);
+            }
+            else
+            {
+                tbCommand.Text += str;
+            }
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -44,12 +61,46 @@ namespace ClientEmul
                 tbRetry.Text = $"{RetryCount++}";
             }
         }
-
+        Socket _sock;
+        Thread _thread;
+        byte[] bArr = new byte[10000];
         private void btnStart_Click(object sender, EventArgs e)
         {
-            timer1.Interval = int.Parse(tbInterval.Text);
-            timer1.Enabled = true;
+            if(ckbTimer.Checked == true)
+            {
+                timer1.Interval = int.Parse(tbInterval.Text);
+                timer1.Enabled = true;
+            }
+            else
+            {
+                _sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                _sock.Connect(tbServerIP.Text, int.Parse(tbServerPort.Text));
+                if (_sock.Connected)
+                {
+                    _thread = new Thread(ReadProcess);
+                    _thread.Start();
+                }
+            }
         }
+        private void ReadProcess()
+        {
+            try
+            {
+                while (true)
+                {
+                    int n = _sock.Receive(bArr); // Low level socket method
+                    string str = Encoding.Default.GetString(bArr,0,n) + "\r\n";
+                    AddText(str);
+                    Thread.Sleep(20);
+                }
+            }
+            catch (Exception e)
+            {
+                string s1 = $"오류 : {e.Message}\r\n"; 
+                AddText(s1);
+            }
+        }
+
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -69,6 +120,16 @@ namespace ClientEmul
         private void btnStop_Click(object sender, EventArgs e)
         {
             timer1.Enabled = false;
+        }
+
+        private void mnuSend1_Click(object sender, EventArgs e)
+        {
+            if(_sock != null)
+            {
+                string str = tbCommand.SelectedText;
+                bArr = Encoding.Default.GetBytes(str);
+                _sock.Send(bArr);
+            }
         }
     }
 }

@@ -1,0 +1,10 @@
+C:\Users\bn\source\repos\WinChatting\WinChatting\bin\Debug\WinChatting.exe.config
+C:\Users\bn\source\repos\WinChatting\WinChatting\bin\Debug\WinChatting.exe
+C:\Users\bn\source\repos\WinChatting\WinChatting\bin\Debug\WinChatting.pdb
+C:\Users\bn\source\repos\WinChatting\WinChatting\obj\Debug\WinChatting.csprojAssemblyReference.cache
+C:\Users\bn\source\repos\WinChatting\WinChatting\obj\Debug\WinChatting.Form1.resources
+C:\Users\bn\source\repos\WinChatting\WinChatting\obj\Debug\WinChatting.Properties.Resources.resources
+C:\Users\bn\source\repos\WinChatting\WinChatting\obj\Debug\WinChatting.csproj.GenerateResource.cache
+C:\Users\bn\source\repos\WinChatting\WinChatting\obj\Debug\WinChatting.csproj.CoreCompileInputs.cache
+C:\Users\bn\source\repos\WinChatting\WinChatting\obj\Debug\WinChatting.exe
+C:\Users\bn\source\repos\WinChatting\WinChatting\obj\Debug\WinChatting.pdb

@@ -49,6 +49,10 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tbSep = new System.Windows.Forms.TextBox();
             this.tbRetry = new System.Windows.Forms.TextBox();
+            this.ckbTimer = new System.Windows.Forms.CheckBox();
+            this.PopupMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuSend1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.PopupMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbCommand
@@ -56,6 +60,7 @@
             this.tbCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbCommand.ContextMenuStrip = this.PopupMenu;
             this.tbCommand.Location = new System.Drawing.Point(1, 2);
             this.tbCommand.Multiline = true;
             this.tbCommand.Name = "tbCommand";
@@ -224,11 +229,36 @@
             this.tbRetry.Size = new System.Drawing.Size(50, 25);
             this.tbRetry.TabIndex = 1;
             // 
+            // ckbTimer
+            // 
+            this.ckbTimer.AutoSize = true;
+            this.ckbTimer.Location = new System.Drawing.Point(455, 198);
+            this.ckbTimer.Name = "ckbTimer";
+            this.ckbTimer.Size = new System.Drawing.Size(18, 17);
+            this.ckbTimer.TabIndex = 4;
+            this.ckbTimer.UseVisualStyleBackColor = true;
+            // 
+            // PopupMenu
+            // 
+            this.PopupMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.PopupMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuSend1});
+            this.PopupMenu.Name = "PopupMenu";
+            this.PopupMenu.Size = new System.Drawing.Size(209, 28);
+            // 
+            // mnuSend1
+            // 
+            this.mnuSend1.Name = "mnuSend1";
+            this.mnuSend1.Size = new System.Drawing.Size(210, 24);
+            this.mnuSend1.Text = "선택된 문자열 전송";
+            this.mnuSend1.Click += new System.EventHandler(this.mnuSend1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(492, 377);
+            this.Controls.Add(this.ckbTimer);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.label3);
@@ -250,6 +280,7 @@
             this.Controls.Add(this.tbCommand);
             this.Name = "Form1";
             this.Text = "Client Emulator v.1.2.";
+            this.PopupMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -277,6 +308,9 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TextBox tbSep;
         private System.Windows.Forms.TextBox tbRetry;
+        private System.Windows.Forms.CheckBox ckbTimer;
+        private System.Windows.Forms.ContextMenuStrip PopupMenu;
+        private System.Windows.Forms.ToolStripMenuItem mnuSend1;
     }
 }
 
