@@ -32,23 +32,27 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.PopupMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuStart = new System.Windows.Forms.ToolStripMenuItem();
-            this.stopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuServerStop = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.setupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSetup = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.종료ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSend1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tbServer = new System.Windows.Forms.TextBox();
             this.tbClient = new System.Windows.Forms.TextBox();
+            this.PopupClient = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuClientStart = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuClientStop = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.StatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.StatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.PopupMain.SuspendLayout();
+            this.PopupClient.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,8 +72,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tbClient);
-            this.splitContainer1.Size = new System.Drawing.Size(518, 318);
-            this.splitContainer1.SplitterDistance = 249;
+            this.splitContainer1.Size = new System.Drawing.Size(480, 318);
+            this.splitContainer1.SplitterDistance = 229;
             this.splitContainer1.TabIndex = 0;
             // 
             // PopupMain
@@ -77,9 +81,9 @@
             this.PopupMain.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.PopupMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuStart,
-            this.stopToolStripMenuItem,
+            this.mnuServerStop,
             this.toolStripMenuItem1,
-            this.setupToolStripMenuItem,
+            this.mnuSetup,
             this.toolStripMenuItem2,
             this.종료ToolStripMenuItem,
             this.mnuSend1});
@@ -91,27 +95,29 @@
             this.mnuStart.Name = "mnuStart";
             this.mnuStart.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.G)));
             this.mnuStart.Size = new System.Drawing.Size(208, 24);
-            this.mnuStart.Text = "Start";
+            this.mnuStart.Text = "Server 시작";
             this.mnuStart.Click += new System.EventHandler(this.mnuStart_Click);
             // 
-            // stopToolStripMenuItem
+            // mnuServerStop
             // 
-            this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
-            this.stopToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.T)));
-            this.stopToolStripMenuItem.Size = new System.Drawing.Size(208, 24);
-            this.stopToolStripMenuItem.Text = "Stop";
+            this.mnuServerStop.Name = "mnuServerStop";
+            this.mnuServerStop.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.T)));
+            this.mnuServerStop.Size = new System.Drawing.Size(208, 24);
+            this.mnuServerStop.Text = "Server Stop ";
+            this.mnuServerStop.Click += new System.EventHandler(this.mnuServerStop_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(205, 6);
             // 
-            // setupToolStripMenuItem
+            // mnuSetup
             // 
-            this.setupToolStripMenuItem.Name = "setupToolStripMenuItem";
-            this.setupToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.C)));
-            this.setupToolStripMenuItem.Size = new System.Drawing.Size(208, 24);
-            this.setupToolStripMenuItem.Text = "Setup";
+            this.mnuSetup.Name = "mnuSetup";
+            this.mnuSetup.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.C)));
+            this.mnuSetup.Size = new System.Drawing.Size(208, 24);
+            this.mnuSetup.Text = "Setup";
+            this.mnuSetup.Click += new System.EventHandler(this.mnuSetup_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -141,45 +147,69 @@
             this.tbServer.Location = new System.Drawing.Point(3, 0);
             this.tbServer.Multiline = true;
             this.tbServer.Name = "tbServer";
-            this.tbServer.Size = new System.Drawing.Size(243, 315);
+            this.tbServer.Size = new System.Drawing.Size(223, 315);
             this.tbServer.TabIndex = 0;
+            this.tbServer.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbServer_KeyPress);
             // 
             // tbClient
             // 
             this.tbClient.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbClient.ContextMenuStrip = this.PopupMain;
+            this.tbClient.ContextMenuStrip = this.PopupClient;
             this.tbClient.Location = new System.Drawing.Point(3, 0);
             this.tbClient.Multiline = true;
             this.tbClient.Name = "tbClient";
-            this.tbClient.Size = new System.Drawing.Size(259, 315);
+            this.tbClient.Size = new System.Drawing.Size(241, 315);
             this.tbClient.TabIndex = 0;
             this.tbClient.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbClient_KeyPress);
+            // 
+            // PopupClient
+            // 
+            this.PopupClient.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.PopupClient.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuClientStart,
+            this.mnuClientStop});
+            this.PopupClient.Name = "PopupClient";
+            this.PopupClient.Size = new System.Drawing.Size(144, 52);
+            // 
+            // mnuClientStart
+            // 
+            this.mnuClientStart.Name = "mnuClientStart";
+            this.mnuClientStart.Size = new System.Drawing.Size(143, 24);
+            this.mnuClientStart.Text = "접속 요청";
+            this.mnuClientStart.Click += new System.EventHandler(this.mnuClientStart_Click);
+            // 
+            // mnuClientStop
+            // 
+            this.mnuClientStop.Name = "mnuClientStop";
+            this.mnuClientStop.Size = new System.Drawing.Size(143, 24);
+            this.mnuClientStop.Text = "접속 종료";
+            this.mnuClientStop.Click += new System.EventHandler(this.mnuClientStop_Click);
             // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripStatusLabel2});
+            this.StatusLabel1,
+            this.StatusLabel2});
             this.statusStrip1.Location = new System.Drawing.Point(0, 323);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(520, 26);
+            this.statusStrip1.Size = new System.Drawing.Size(482, 26);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // StatusLabel1
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(152, 20);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            this.StatusLabel1.Name = "StatusLabel1";
+            this.StatusLabel1.Size = new System.Drawing.Size(152, 20);
+            this.StatusLabel1.Text = "toolStripStatusLabel1";
             // 
-            // toolStripStatusLabel2
+            // StatusLabel2
             // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(152, 20);
-            this.toolStripStatusLabel2.Text = "toolStripStatusLabel2";
+            this.StatusLabel2.Name = "StatusLabel2";
+            this.StatusLabel2.Size = new System.Drawing.Size(152, 20);
+            this.StatusLabel2.Text = "toolStripStatusLabel2";
             // 
             // timer1
             // 
@@ -189,12 +219,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(520, 349);
+            this.ClientSize = new System.Drawing.Size(482, 349);
             this.ContextMenuStrip = this.PopupMain;
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.Text = "Cocoa ver.2.1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -202,6 +234,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.PopupMain.ResumeLayout(false);
+            this.PopupClient.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -214,18 +247,21 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ContextMenuStrip PopupMain;
         private System.Windows.Forms.ToolStripMenuItem mnuStart;
-        private System.Windows.Forms.ToolStripMenuItem stopToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuServerStop;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem setupToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuSetup;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem 종료ToolStripMenuItem;
         private System.Windows.Forms.TextBox tbServer;
         private System.Windows.Forms.TextBox tbClient;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel StatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel StatusLabel2;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripMenuItem mnuSend1;
+        private System.Windows.Forms.ContextMenuStrip PopupClient;
+        private System.Windows.Forms.ToolStripMenuItem mnuClientStart;
+        private System.Windows.Forms.ToolStripMenuItem mnuClientStop;
     }
 }
 
